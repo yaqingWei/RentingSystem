@@ -53,7 +53,7 @@ public class Tbl_UserController {
      */
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Object login(Tbl_User tbl_user, Model model,Ip_Lock ip_lock){
+    public Object login(Tbl_User tbl_user, Model model, Ip_Lock ip_lock, IpLockResult ipLockResult) {
         String ip = IpUtil.getIP(request);
         //初始化
         ip_lock.setIp(ip);
@@ -62,14 +62,15 @@ public class Tbl_UserController {
         Ip_Lock ipLock = ip_lockService.find(ip_lock);
         System.out.println(ipLock);
         //账号已锁定（可以优化,针对业务的多样可以新建一个result类对结果进行判断返回）
-        if(ipLock!=null && ipLock.getDate().getTime()>new Date().getTime()){
-                return ipLock;
+        if (ipLock != null && ipLock.getDate().getTime() > new Date().getTime()) {
+            System.out.println("1111"+ipLockResult);
+            ipLockResult.setIp_lock(ipLock);
+            System.out.println(ipLockResult.getIp_lock());
+            return ipLockResult;
         }
-        System.out.println(ipLock);
-        System.out.println(user);
         if (user != null) {
             //情况判断
-            if(ipLock!=null){
+            if (ipLock != null) {
                 ipLock.setCount(0);
                 ip_lockService.updateCount(ipLock);
             }
@@ -86,24 +87,29 @@ public class Tbl_UserController {
             model.addAttribute("fwlxList", fwlxList);
             model.addAttribute("qxList", qxList);
             model.addAttribute("user", user);
+            ipLockResult.setUser(user);
         } else {
             //情况判断
-            if(ipLock!=null){
+            if (ipLock != null) {
                 Integer count = ipLock.getCount();
-                if(count+1<5){
-                    ipLock.setCount(ipLock.getCount()+1);
+                if (count + 1 < 5) {
+                    ipLock.setCount(ipLock.getCount() + 1);
                     ip_lockService.updateCount(ipLock);
-                }else{
-                    ipLock.setCount(ipLock.getCount()+1);
+                } else {
+                    ipLock.setCount(ipLock.getCount() + 1);
                     ip_lockService.updateCount(ipLock);
                     ip_lockService.updateDate(ipLock);
-                    return ip_lock;
+                    //封装
+                    ipLockResult.setIp_lock(ip_lock);
+                    System.out.println(ipLockResult);
+                    return ipLockResult;
+
                 }
-            }else{
+            } else {
                 ip_lockService.insert(ip_lock);
             }
         }
-        return user;
+        return ipLockResult;
     }
 
     @RequestMapping("/loginGo")

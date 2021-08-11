@@ -29,9 +29,9 @@
                     dataType: "json",
                     contentType: "application/x-www-form-urlencoded",
                     success: function (result) {
-                        if (result != null && (typeof result.ip)!="undefined") {
-                            alert(result.ip+":该账号已被锁定至"+result.date);
-                        }else if(result != null && (typeof result.uid)!="undefined"){
+                        if (result.ip_lock!=null) {
+                            alert(result.ip_lock.ip+":该账号已被锁定至"+result.ip_lock.date);
+                        }else if(result.user!=null){
                             $("[name='myForm']").empty();
                             $("[name='myForm']").append(" <table align='center'><tr><td width=''><font color='red'>当前用户:${sessionScope.user.uname}</font></td> </tr><tr> <td width='150'><a href='my.jsp'>管理我的租房信息</a></td></tr><tr><td width='100'><a href='${pageContext.request.contextPath}/post'>发布租房信息</a></td> </tr> <tr> <td width='100'><a href='${pageContext.request.contextPath}/logout'>[注销]</a></td></tr> </table>");
                         } else {
