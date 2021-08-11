@@ -10,6 +10,7 @@ import com.oracle.webservices.internal.api.message.ContentType;
 import com.service.*;
 import com.util.IpUtil;
 import com.util.Md5Util;
+import javafx.scene.input.DataFormat;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.omg.PortableInterceptor.ObjectReferenceTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -53,7 +56,7 @@ public class Tbl_UserController {
      */
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Object login(Tbl_User tbl_user, Model model, Ip_Lock ip_lock, IpLockResult ipLockResult) {
+    public Object login(Tbl_User tbl_user, Model model, Ip_Lock ip_lock, IpLockResult ipLockResult) throws ParseException {
         String ip = IpUtil.getIP(request);
         //初始化
         ip_lock.setIp(ip);
@@ -62,10 +65,8 @@ public class Tbl_UserController {
         Ip_Lock ipLock = ip_lockService.find(ip_lock);
         System.out.println(ipLock);
         //账号已锁定（可以优化,针对业务的多样可以新建一个result类对结果进行判断返回）
-        if (ipLock != null && ipLock.getDate().getTime() > new Date().getTime()) {
-            System.out.println("1111"+ipLockResult);
+        if (ipLock != null && ipLock.getDate().compareTo(new Date())==1){
             ipLockResult.setIp_lock(ipLock);
-            System.out.println(ipLockResult.getIp_lock());
             return ipLockResult;
         }
         if (user != null) {
@@ -100,7 +101,7 @@ public class Tbl_UserController {
                     ip_lockService.updateCount(ipLock);
                     ip_lockService.updateDate(ipLock);
                     //封装
-                    ipLockResult.setIp_lock(ip_lock);
+                    ipLockResult.setIp_lock(ipLock);
                     System.out.println(ipLockResult);
                     return ipLockResult;
 
