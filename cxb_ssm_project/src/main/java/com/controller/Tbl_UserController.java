@@ -61,7 +61,7 @@ public class Tbl_UserController {
         Tbl_User user = tbl_userService.findLogin(tbl_user);
         Ip_Lock ipLock = ip_lockService.find(ip_lock);
         System.out.println(ipLock);
-        //账号已锁定
+        //账号已锁定（可以优化,针对业务的多样可以新建一个result类对结果进行判断返回）
         if(ipLock!=null && ipLock.getDate().getTime()>new Date().getTime()){
                 return ipLock;
         }
