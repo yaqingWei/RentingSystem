@@ -74,6 +74,7 @@ public class Tbl_UserController {
             if (ipLock != null) {
                 ipLock.setCount(0);
                 ip_lockService.updateCount(ipLock);
+                ip_lockService.updateDatenow(ipLock);
             }
             List<Tbl_Fwxx> fwxxList = tbl_fwxxService.findByUid(user.getUid());
             int shi = tbl_fwxxService.selectMaxShi();

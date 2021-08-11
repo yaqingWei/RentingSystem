@@ -16,4 +16,6 @@ public interface Ip_LockService {
     int updateCount(Ip_Lock ip_lock);
 
     int  updateDate(Ip_Lock ip_lock);
+
+    int  updateDatenow(Ip_Lock ip_lock);
 }

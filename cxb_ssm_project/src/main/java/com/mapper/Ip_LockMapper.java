@@ -22,4 +22,7 @@ public interface Ip_LockMapper {
 
     @Update("update Ip_Lock set date=ADDDATE(#{date},interval 5 MINUTE) where ip=#{ip} and uname=#{uname}")
     int  updateDate(Ip_Lock ip_lock);
+
+    @Update("update Ip_Lock set date=now() where ip=#{ip} and uname=#{uname}")
+    int  updateDatenow(Ip_Lock ip_lock);
 }

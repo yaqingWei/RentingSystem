@@ -33,4 +33,9 @@ public class Ip_LockServiceImpl implements Ip_LockService {
     public int updateDate(Ip_Lock ip_lock) {
         return ip_lockMapper.updateDate(ip_lock);
     }
+
+    @Override
+    public int updateDatenow(Ip_Lock ip_lock) {
+        return ip_lockMapper.updateDatenow(ip_lock);
+    }
 }
