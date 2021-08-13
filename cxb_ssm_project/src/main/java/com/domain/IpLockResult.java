@@ -17,4 +17,5 @@ import lombok.ToString;
 public class IpLockResult {
     private Ip_Lock ip_lock;
     private Tbl_User user;
+    private Integer check;
 }

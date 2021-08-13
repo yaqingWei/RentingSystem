@@ -56,7 +56,11 @@ public class Tbl_UserController {
      */
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Object login(Tbl_User tbl_user, Model model, Ip_Lock ip_lock, IpLockResult ipLockResult) throws ParseException {
+    public Object login(Tbl_User tbl_user, Model model, Ip_Lock ip_lock, IpLockResult ipLockResult,String imgcode) throws ParseException {
+        if(!request.getSession().getAttribute("code").equals(imgcode)){
+            ipLockResult.setCheck(0);
+            return ipLockResult;
+        }
         String ip = IpUtil.getIP(request);
         //初始化
         ip_lock.setIp(ip);

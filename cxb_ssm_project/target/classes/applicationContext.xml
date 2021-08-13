@@ -4,23 +4,49 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-        <context:component-scan base-package="com.service"/>
+    <context:component-scan base-package="com.service,com.util"/>
 
-        <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
-        <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-                <property name="jdbcUrl" value="${jdbc.url}"/>
-                <property name="password" value="${jdbc.passwrod}"/>
-                <property name="user" value="${jdbc.username}"/>
-                <property name="driverClass" value="${jdbc.driver}"/>
-        </bean>
+    <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="password" value="${jdbc.passwrod}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="driverClass" value="${jdbc.driver}"/>
+    </bean>
 
-        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-                <property name="basePackage" value="com.mapper"/>
-         </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mapper"/>
+    </bean>
 
-        <bean class="org.mybatis.spring.SqlSessionFactoryBean">
-                <property name="dataSource" ref="dataSource"/>
-                <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
-        </bean>
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
+    </bean>
+
+    <!--配置验证码-->
+    <bean class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="KAPTCHA_BORDER">yes</prop>
+                        <prop key="KAPTCHA_BORDER_COLOR">105,179,90</prop>
+                        <prop key="KAPTCHA_TEXTPRODUCER_FONT_COLOR">blue</prop>
+                        <prop key="KAPTCHA_IMAGE_WIDTH">160</prop>
+                        <prop key="KAPTCHA_IMAGE_HEIGHT">60</prop>
+                        <prop key="KAPTCHA_TEXTPRODUCER_FONT_SIZE">35</prop>
+                        <prop key="KAPTCHA_SESSION_CONFIG_KEY">kaptchaCodeMath</prop>
+                        <prop key="KAPTCHA_TEXTPRODUCER_IMPL">com.catl.framework.config.KaptchaTextCreator</prop>
+                        <prop key="KAPTCHA_TEXTPRODUCER_CHAR_SPACE">3</prop>
+                        <prop key="KAPTCHA_TEXTPRODUCER_CHAR_LENGTH">6</prop>
+                        <prop key="KAPTCHA_TEXTPRODUCER_FONT_NAMES">Arial,Courier,微软雅黑,宋体,楷体</prop>
+                        <prop key="KAPTCHA_NOISE_COLOR">white</prop>
+                        <prop key="KAPTCHA_NOISE_IMPL">com.google.code.kaptcha.impl.NoNoise</prop>
+                        <prop key="KAPTCHA_OBSCURIFICATOR_IMPL">com.google.code.kaptcha.impl.ShadowGimpy</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
 </beans>

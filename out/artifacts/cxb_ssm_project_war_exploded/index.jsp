@@ -12,6 +12,16 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/jquery/jquery.js"></script>
     <script type="text/javascript">
         $(function(){
+            $.post("${pageContext.request.contextPath}/yanzhengMa",function(data){
+                   $("#imgcode").prop("src",data);
+            });
+            $("#imgcode").bind("click",function(){
+                $.post("${pageContext.request.contextPath}/yanzhengMa",function(data){
+                    $("#imgcode").prop("src",data);
+                });
+            })
+        });
+        $(function(){
             $("[value='登陆']").bind("click",function (){
                 var name = document.myForm.uname.value;
                 var pass = document.myForm.upass.value;
@@ -34,7 +44,9 @@
                         }else if(result.user!=null){
                             $("[name='myForm']").empty();
                             $("[name='myForm']").append(" <table align='center'><tr><td width=''><font color='red'>当前用户:${sessionScope.user.uname}</font></td> </tr><tr> <td width='150'><a href='my.jsp'>管理我的租房信息</a></td></tr><tr><td width='100'><a href='${pageContext.request.contextPath}/post'>发布租房信息</a></td> </tr> <tr> <td width='100'><a href='${pageContext.request.contextPath}/logout'>[注销]</a></td></tr> </table>");
-                        } else {
+                        } else if(result.check!=null){
+                            alert("验证码输入错误！");
+                        }else{
                             alert("登录失败！");
                         }
                     }
@@ -164,9 +176,12 @@
                     </tr>
                     <tr>
                         <td>
-                            二维码扫码登录<br/>
-                            <img src="images/code.jpg" width="90px">
+                            验证码<br/>
+                            <img id="imgcode" width="90px">
                         </td>
+                    </tr>
+                    <tr>
+                        <td><input name="imgcode" style="width: 90px;"></td>
                     </tr>
                     <tr>
                         <td><a href="reg.jsp">注册用户</a></td>

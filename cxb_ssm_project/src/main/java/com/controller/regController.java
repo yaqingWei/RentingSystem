@@ -2,6 +2,8 @@ package com.controller;
 
 import com.domain.Tbl_User;
 import com.service.Tbl_UserService;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.util.KaptchaTextCreator;
 import com.util.Md5Util;
 import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,11 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 
 /**
@@ -28,35 +32,23 @@ import java.util.Random;
 public class regController {
     @Autowired
     private Tbl_UserService tbl_userService;
-
+    @Autowired
+    private HttpSession session;
+    @Autowired
+    private KaptchaTextCreator kaptcha;
     @RequestMapping("/yanzhengMa")
     @ResponseBody
     public void yanzhengMa(HttpServletResponse resp, HttpServletRequest req) throws IOException {
-        BufferedImage img = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = img.createGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, 50, 50);
-        Random ran = new Random();
-        char[] chars = "1234567890qwertyuiopasdfghjklzxcvbnm".toCharArray();
-        //保存验证码
-        String code = "";
-        g.setColor(Color.red);
-        g.setFont(new Font("宋体", Font.BOLD, 10));
-        for (int i = 0; i < 4; i++) {
-            String val = chars[ran.nextInt(chars.length)] + "";
-            g.drawString(val, i * 10, ran.nextInt(50));
-            code += val;
-        }
-        g.setColor(Color.gray);
-        //画线
-        for (int i = 0; i < 5; i++) {
-            g.drawLine(ran.nextInt(50), ran.nextInt(50), ran.nextInt(50), ran.nextInt(50));
-        }
-        System.out.println(code);
-        req.getSession(true).setAttribute("code", code);
-        ServletOutputStream out = resp.getOutputStream();
-        ImageIO.write(img, "jpg", out);
-        out.flush();
+        String[] split = kaptcha.getText().split("@");
+        String image = kaptcha.getImage(split[0]);
+        session.setAttribute("code",split[1]);
+        resp.setHeader("Pragma", "no-cache");
+        resp.setHeader("Cache-Control", "no-cache");
+        resp.setContentType("text/html;charset=utf-8");
+        PrintWriter out = resp.getWriter();
+        System.out.println(image);
+        out.print(image);
+        out.close();
     }
 
     @RequestMapping("/register")
