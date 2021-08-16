@@ -43,7 +43,7 @@
                             alert(result.ip_lock.ip+":该账号已被锁定至"+result.ip_lock.date);
                         }else if(result.user!=null){
                             $("[name='myForm']").empty();
-                            $("[name='myForm']").append(" <table align='center'><tr><td width=''><font color='red'>当前用户:${sessionScope.user.uname}</font></td> </tr><tr> <td width='150'><a href='my.jsp'>管理我的租房信息</a></td></tr><tr><td width='100'><a href='${pageContext.request.contextPath}/post'>发布租房信息</a></td> </tr> <tr> <td width='100'><a href='${pageContext.request.contextPath}/logout'>[注销]</a></td></tr> </table>");
+                            $("[name='myForm']").append(" <table align='center'><tr><td width=''><font color='red'>当前用户:"+result.user.uname+"</font></td> </tr><tr> <td width='150'><a href='my.jsp'>管理我的租房信息</a></td></tr><tr><td width='100'><a href='${pageContext.request.contextPath}/post'>发布租房信息</a></td> </tr> <tr> <td width='100'><a href='${pageContext.request.contextPath}/logout'>[注销]</a></td></tr> </table>");
                         } else if(result.check!=null){
                             alert("验证码输入错误！");
                         }else{

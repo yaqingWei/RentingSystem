@@ -65,6 +65,8 @@ public class Tbl_UserController {
         ip_lock.setIp(ip);
         ip_lock.setCount(0);
         Tbl_User user = tbl_userService.findLogin(tbl_user);
+        //解决视图渲染流程未经过
+        request.getSession().setAttribute("user",user);
         Ip_Lock ipLock = ip_lockService.find(ip_lock);
         System.out.println(ipLock);
         //账号已锁定（可以优化,针对业务的多样可以新建一个result类对结果进行判断返回）
