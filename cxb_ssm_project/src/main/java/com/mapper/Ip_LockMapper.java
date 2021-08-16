@@ -11,10 +11,10 @@ import org.springframework.lang.Nullable;
  * @create 2021-08-10 11:41
  */
 public interface Ip_LockMapper {
-    @Select("insert into Ip_Lock values(null,#{ip},#{uname},#{count},default)")
+    @Select("insert into ip_lock values(null,#{ip},#{uname},#{count},default)")
     int insert(Ip_Lock ip_lock);
 
-    @Select("select * from Ip_Lock where ip=#{ip} and uname=#{uname}")
+    @Select("select * from ip_lock where ip=#{ip} and uname=#{uname}")
     Ip_Lock find(Ip_Lock ip_lock);
 
     @Update("update Ip_Lock set count=#{count} where ip=#{ip} and uname=#{uname}")
