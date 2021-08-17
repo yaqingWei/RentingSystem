@@ -8,6 +8,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.service.*;
 import com.util.IpUtil;
+import com.util.JWTUtils;
 import com.util.Md5Util;
 import javafx.scene.input.DataFormat;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
@@ -18,13 +19,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -48,15 +52,18 @@ public class Tbl_UserController {
     @Autowired
     private HttpServletRequest request;
     @Autowired
+    private HttpServletResponse response;
+    @Autowired
     private Ip_LockService ip_lockService;
+
 
     /**
      * 将异常抛给Springmvc进行处理
      */
     @RequestMapping(value = "/login")
     @ResponseBody
-    public Object login(Tbl_User tbl_user, Model model, Ip_Lock ip_lock, IpLockResult ipLockResult,String imgcode) throws ParseException {
-        if(!request.getSession().getAttribute("code").equals(imgcode)){
+    public Object login(Tbl_User tbl_user, Model model, Ip_Lock ip_lock, IpLockResult ipLockResult, String imgcode) throws ParseException {
+        if (!request.getSession().getAttribute("code").equals(imgcode)) {
             ipLockResult.setCheck(0);
             return ipLockResult;
         }
@@ -66,11 +73,11 @@ public class Tbl_UserController {
         ip_lock.setCount(0);
         Tbl_User user = tbl_userService.findLogin(tbl_user);
         //解决视图渲染流程未经过
-        request.getSession().setAttribute("user",user);
+        request.getSession().setAttribute("user", user);
         Ip_Lock ipLock = ip_lockService.find(ip_lock);
         System.out.println(ipLock);
         //账号已锁定（可以优化,针对业务的多样可以新建一个result类对结果进行判断返回）
-        if (ipLock != null && ipLock.getDate().compareTo(new Date())==1){
+        if (ipLock != null && ipLock.getDate().compareTo(new Date()) == 1) {
             ipLockResult.setIp_lock(ipLock);
             return ipLockResult;
         }
@@ -87,6 +94,13 @@ public class Tbl_UserController {
             List<Tbl_Jd> jdList = tbl_jdService.findAll();
             List<Tbl_Fwlx> fwlxList = tbl_fwlxService.findAll();
             List<Tbl_Qx> qxList = tbl_qxService.findAll();
+            //生成token令牌
+            HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put("uname", user.getUname());
+            hashMap.put("uid", user.getUid() + "");
+            String token = JWTUtils.getToken(hashMap);
+            response.addCookie(new Cookie("token", token));
+
             model.addAttribute("fwxxList", fwxxList);
             model.addAttribute("shi", shi);
             model.addAttribute("ting", ting);
@@ -148,6 +162,9 @@ public class Tbl_UserController {
     @RequestMapping("/logout")
     public String logout(HttpSession session, Model model) {
         session.removeAttribute("user");
+        Cookie token = new Cookie("token", "");
+        token.setMaxAge(0);
+        response.addCookie(token);
         model.addAttribute("page", 1);
         return "redirect:selectAll";
     }
