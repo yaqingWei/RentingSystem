@@ -127,7 +127,7 @@
 
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
-        <td colspan="5"><img src="images/top.jpg" width="780" height="213"></td>
+        <td colspan="5"><img src="${pageContext.request.contextPath}/images/top.jpg" width="780" height="213"></td>
     </tr>
     <tr>
         <td colspan="5"><img src="images/middle1.jpg" width="780" height="47"></td>
