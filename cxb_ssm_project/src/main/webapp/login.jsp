@@ -69,11 +69,11 @@
             location.href = "${pageContext.request.contextPath}/loginGo?page=" + value+"&uid="+${user.uid};
         }
 
-        function selectHuixian() {
+       /* function selectHuixian() {
 
             $("select[name='fenye']").val(${page});
         }
-        window.onload=selectHuixian;
+        window.onload=selectHuixian;*/
 
     </script>
 </HEAD>

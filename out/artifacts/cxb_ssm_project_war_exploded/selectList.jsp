@@ -114,11 +114,25 @@
                 </td>
             </tr>
         </table>
-        <select name="fenye" onchange="selectChange(this.value)">
-            <c:forEach begin="1" end="${pageCount}" step="1" var="i">
-                <option value="${i}">第${i}页</option>
-            </c:forEach>
-        </select>
+        <span id="prePage"><input type="button" value="上一页" onclick="selectChange(${page-1})"/></span>
+
+        <span>
+                 <a href="javascript:void(0)" onclick="selectChange(1)">1</a>
+                      <c:if test="${page-2>2}">
+                          <a href="javascript:void(0)">...</a>
+                      </c:if>
+                            <c:forEach begin="${page-2>1?page-2:2}" end="${page+2<=pageCount?page+2:pageCount}" step="1" var="i">
+                                <a href="javascript:void(0)" onclick="selectChange(${i})">${i}</a>
+                            </c:forEach>
+                      <c:if test="${page+2<pageCount-1}">
+                          <a href="javascript:void(0)">...</a>
+                      </c:if>
+                <c:if test="${page+2<pageCount}">
+                <a href="javascript:void(0)" onclick="selectChange(${pageCount})">${pageCount}</a>
+                </c:if>
+         </span>
+
+        <span id="nextPage"><input type="button" value="下一页" onclick="selectChange(${page+1})"/></span>
     </form>
 </td>
 

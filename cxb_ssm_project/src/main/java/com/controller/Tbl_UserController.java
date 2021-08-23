@@ -141,7 +141,7 @@ public class Tbl_UserController {
         List<Tbl_Jd> jdList = tbl_jdService.findAll();
         List<Tbl_Fwlx> fwlxList = tbl_fwlxService.findAll();
         List<Tbl_Qx> qxList = tbl_qxService.findAll();
-        PageHelper.startPage(page, 5);
+        PageHelper.startPage(page, 2);
         List<Tbl_Fwxx> fwxxList = tbl_fwxxService.findByUid(uid);
         modelAndView.addObject("shi", shi);
         modelAndView.addObject("ting", ting);
