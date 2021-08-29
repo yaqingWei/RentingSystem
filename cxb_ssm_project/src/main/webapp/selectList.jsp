@@ -14,13 +14,14 @@
                 }
             }
         </script>
-        <div style="text-align:left;width:88%;">
+        <div style="text-align:center;width:88%;" class="container">
             <input name="title">
             <input type="submit" value="查询" class="btn"> <span onclick="fswitch('advSearch');"
                                                                style="cursor:hand;color:blue;">高级搜索</span>
         </div>
+        <br/>
 
-        <table width="88%;" id="advSearch" style="border:solid 0px #000;display:none;">
+        <table width="88%;" id="advSearch" style="border:solid 0px #000;display:none;" class="table">
 
             <tr>
                 <td>区县：</td>
@@ -94,7 +95,8 @@
             </tr>
 
         </table>
-        <table width="88%" cellspacing="0">
+        <br>
+        <table width="88%" cellspacing="0" class="table table-bordered table-condensed table-hover table-striped">
             <tr>
                 <TD width='250' class="table_title">标题</TD>
                 <TD width='90' align='center' class="table_title">月租金</TD>

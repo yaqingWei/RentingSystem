@@ -5,7 +5,7 @@
 <HEAD>
     <TITLE>北京出租房</TITLE>
     <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
     <link href="style/mycss.css" rel="stylesheet" type="text/css"/>
     <link href="style/text.css" rel="stylesheet" type="text/css"/>
     <link href="style/btn.css" rel="stylesheet" type="text/css"/>
@@ -74,7 +74,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width='100'><a href="${pageContext.request.contextPath}/logout">[注销]</a></td>
+                    <td width='100'><a href="${pageContext.request.contextPath}/logout" class="warning">[注销]</a></td>
                 </tr>
             </table>
         </td>
@@ -86,18 +86,13 @@
                     <td width="97%">
 
 
-                        <table width='450' border='0'>
+                        <table width='450' border='0' class="table table-hover table-condensed table-striped">
                             <tr>
                                 <TD>标题</TD>
                                 <TD width='100' align='center'>月租金</TD>
                                 <TD width='110' align='center'>发布日期</TD>
                                 <TD width='50'>&nbsp;</TD>
                                 <TD width='50'>&nbsp;</TD>
-                            </tr>
-                            <tr>
-                                <td colspan='5'>
-                                    <hr/>
-                                </td>
                             </tr>
                             <c:forEach items="${sessionScope.fwxxList}" var="i">
                                 <tr>
