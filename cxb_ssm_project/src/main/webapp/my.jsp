@@ -87,7 +87,7 @@
 
 
                         <table width='450' border='0' class="table table-hover table-condensed table-striped">
-                            <tr>
+                            <tr class="warning">
                                 <TD>标题</TD>
                                 <TD width='100' align='center'>月租金</TD>
                                 <TD width='110' align='center'>发布日期</TD>
@@ -102,8 +102,8 @@
                                     <td align='center' style='height:30px;'>${i.zj}元</td>
                                     <td align='center' style='height:30px;'><fmt:formatDate value="${i.date}"
                                                                                             pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                                    <td align='center' style='height:30px;'><a href='javascript:void(0)' onclick="loginDel(${i.fwid})">[删除]</a></td>
-                                    <td align='center' style='height:30px;'><a href='${pageContext.request.contextPath}/updateFwxx?fwid=${i.fwid}'>[修改]</a></td>
+                                    <td align='center' style='height:30px;'><a href='javascript:void(0)' onclick="loginDel(${i.fwid})" class="btn btn-danger btn-xs">删除</a></td>
+                                    <td align='center' style='height:30px;'><a href='${pageContext.request.contextPath}/updateFwxx?fwid=${i.fwid}' class="btn btn-warning btn-xs">修改</a></td>
                                 </tr>
                             </c:forEach>
 
