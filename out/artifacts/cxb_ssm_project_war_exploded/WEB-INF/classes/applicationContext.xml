@@ -14,7 +14,6 @@
         <property name="user" value="${jdbc.username}"/>
         <property name="driverClass" value="${jdbc.driver}"/>
     </bean>
-
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.mapper"/>
     </bean>

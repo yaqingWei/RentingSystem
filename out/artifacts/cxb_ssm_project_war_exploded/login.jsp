@@ -5,7 +5,7 @@
 <HEAD>
     <TITLE>北京出租房</TITLE>
     <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
     <link href="style/mycss.css" rel="stylesheet" type="text/css"/>
     <link href="style/text.css" rel="stylesheet" type="text/css"/>
     <link href="style/btn.css" rel="stylesheet" type="text/css"/>

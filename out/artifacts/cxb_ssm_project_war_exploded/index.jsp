@@ -5,7 +5,7 @@
 <HEAD>
     <TITLE>北京出租房</TITLE>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
     <link href="style/mycss.css" rel="stylesheet" type="text/css"/>
     <link href="style/text.css" rel="stylesheet" type="text/css"/>
     <link href="style/btn.css" rel="stylesheet" type="text/css"/>
@@ -159,32 +159,34 @@
                         <td colspan="2">用户名：</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="text" name="uname" size=10" class="editbox"></td>
+                        <td colspan="2"><input type="text" name="uname" size=10" class="form-control" style="height: 25px;"></td>
                     </tr>
                     <tr>
                         <td colspan="2">密&nbsp;&nbsp;码：</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="password" name="upass" size=10" class='editbox'></td>
+                        <td colspan="2"><input type="password" name="upass" size=10" class='form-control' style="height: 25px;"></td>
                     </tr>
                     <tr>
                         <td>
+                            <br>
                             <input type="hidden" name="sign" value="login"/>
-                            <input type="button" value="登陆" class='btn'>
+                            <input type="button" value="登陆"  class="btn">
                             <input type="reset" value="重置" class='btn'>
                         </td>
                     </tr>
                     <tr>
                         <td>
+                            <br>
                             验证码<br/>
                             <img id="imgcode" width="90px">
                         </td>
                     </tr>
                     <tr>
-                        <td><input name="imgcode" style="width: 90px;"></td>
+                        <td><br><input name="imgcode" style="width: 90px;height: 25px" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td><a href="reg.jsp">注册用户</a></td>
+                        <td><br><a href="reg.jsp"><kbd>注册用户</kbd></a></td>
                     </tr>
                 </table>
             </form>

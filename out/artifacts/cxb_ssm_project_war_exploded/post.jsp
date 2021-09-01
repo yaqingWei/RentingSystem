@@ -4,7 +4,7 @@
 <HEAD>
     <TITLE>北京出租房</TITLE>
     <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
     <link href="style/mycss.css" rel="stylesheet" type="text/css"/>
     <link href="style/texts.css" rel="stylesheet" type="text/css"/>
     <link href="style/btn.css" rel="stylesheet" type="text/css"/>
@@ -129,11 +129,11 @@
                 -->
             </script>
 
-            <table align="center">
+            <table align="center" class="table">
                 <tr>
                     <td width=''><font color='red'>当前用户：
 
-                        ${user.uname}</font>
+                        <code>${user.uname}</code></font>
                     </td>
                 </tr>
                 <tr>
@@ -167,11 +167,11 @@
                     </tr>
                     <tr>
                         <td><strong>标题：</strong></td>
-                        <td><input type="text" name="title"></td>
+                        <td><input type="text" name="title" class="form-control" style="height: 30px;"></td>
                     </tr>
                     <tr>
-                        <td><strong>区县：</strong></td>
-                        <td><select name="qxid" onChange="selectjd()">
+                        <td><strong><br>区县：</strong></td>
+                        <td><select name="qxid" onChange="selectjd()" class="form-control" style="height: 30px;">
                             <c:forEach items="${qxList}" var="i">
                                 <option value='${i.qxid}'>${i.qx}</option>
                             </c:forEach>
@@ -179,18 +179,18 @@
                     </tr>
                     <tr>
                         <td><strong>街道：</strong></td>
-                        <td><select name="jdid">
+                        <td><select name="jdid" class="form-control" style="height: 30px;">
                             <c:forEach items="${jdList}" var="i">
                                 <option value="${i.jdid}">${i.jd}</option>
                             </c:forEach>
                         </select></td>
                     </tr>
                     <tr>
-                        <td><strong>租金：</strong></td>
-                        <td><input type="text" name="zj"/>元/月</td>
+                        <td><strong><br>租金(元/月)：</strong></td>
+                        <td><input type="text" name="zj" class="form-control" style="height: 30px;"/></td>
                     </tr>
                     <tr>
-                        <td><strong>户型：</strong></td>
+                        <td><strong><br>户型：</strong></td>
                         <td>
                             <select name="shi">
                                 <c:forEach begin="1" end="${shi}" step="1" var="i">
@@ -206,7 +206,7 @@
                     </tr>
                     <tr>
                         <td><strong>房屋类型：</strong></td>
-                        <td><select name="lxid">
+                        <td><select name="lxid" class="form-control" style="height: 30px;">
                             <option value='1'>地下室</option>
                             <option value='2'>平房</option>
                             <option value='3'>普通住宅</option>
@@ -216,25 +216,25 @@
                         </select></td>
                     </tr>
                     <tr>
-                        <td><strong>联系电话：</strong></td>
-                        <td><input type="text" name="telephone"></td>
+                        <td><strong><br>联系电话：</strong></td>
+                        <td><input type="text" name="telephone" class="form-control" style="height: 30px;"></td>
                     </tr>
                     <tr>
                         <td><strong>联系人：</strong></td>
-                        <td><input type="text" name="lxr"></td>
+                        <td><input type="text" name="lxr" class="form-control" style="height: 30px;"><br></td>
                     </tr>
                     <tr>
                         <td><strong>房屋信息：</strong></td>
-                        <td><textarea name="fwxx" rows="10" cols="40"></textarea></td>
+                        <td><textarea name="fwxx" rows="10" cols="40" class="form-control" style="height: 70px;"></textarea></td>
                     </tr>
                     <tr>
                         <td><strong>房屋图片</strong></td>
-                        <td><input type="file" name="fileupload"/></td>
+                        <td><br><input type="file" name="fileupload"/></td>
                     </tr>
                     <tr>
                         <td colspan="2">
                             <input type="hidden" name="uid" value="${user.uid}">
-                            <div align="center"><input type="submit" value="提交" class="btn"></div>
+                            <div align="center"><input type="submit" value="提交" class="btn btn-success btn-xs"></div>
                         </td>
                     </tr>
                 </table>

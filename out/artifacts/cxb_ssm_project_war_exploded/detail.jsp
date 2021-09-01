@@ -5,7 +5,7 @@
 <HEAD>
     <TITLE>北京出租房</TITLE>
     <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
     <link href="style/mycss.css" rel="stylesheet" type="text/css"/>
     <link href="style/text.css" rel="stylesheet" type="text/css"/>
     <link href="style/btn.css" rel="stylesheet" type="text/css"/>
@@ -99,9 +99,18 @@
                 </tr>
                 <td><strong>电话/手机：</strong>${requestScope.fwxx.telephone}</td>
                 <td rowspan="9">
-                    <div id="container">
-                        <div id="smallDiv">
-                            <img src="images/${requestScope.fwxx.img}" width="200"/>
+                    <div id="container" class="row">
+                        <div id="smallDiv" class="thumbnail">
+                            <img src="images/${requestScope.fwxx.img}" width="200px"/>
+                            <div class="text-center">
+                                <br>
+                                <br>
+                                <br>
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-heart"></span>喜欢
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-info"><span class="glyphicon glyphicon-envelope">私信</span>
+                                </button>
+                            </div>
                             <div id="zoomDiv"></div>
                             <div id="cover"></div>
                         </div>

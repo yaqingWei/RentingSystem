@@ -42,7 +42,8 @@ public class JWTUtils {
 
     public static DecodedJWT checkJWT(String token){
         JWTVerifier build = JWT.require(Algorithm.HMAC256(SIGN)).build();
-        return  build.verify(token);
+        DecodedJWT verify = build.verify(token);
+        return verify;
     }
 
 }
