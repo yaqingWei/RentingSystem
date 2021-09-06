@@ -22,29 +22,37 @@ import java.util.Map;
 public class Tbl_UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //释放静态以及不再校验范围内的资源
+        String path = request.getServletPath();
+        if (path.equals("/detail")|| path.equals("/yanzhengMa") || path.equals("/selectAll") || path.endsWith(".jsp") || path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js") || path.endsWith(".jpg")) {
+            return true;
+        }
         Cookie[] cookies = request.getCookies();
-        String token="";
+        String token = "";
         if (cookies != null && cookies.length > 0) {
             for (Cookie c : cookies) {
-                if(c.getName().equals("token")){
-                    token=c.getValue();
+                if (c.getName().equals("token")) {
+                    token = c.getValue();
                     break;
                 }
             }
         }
         Map<String, String> map = new HashMap<String, String>();
-        try {
-            JWTUtils.checkJWT(token);
-            return true;
-        } catch (AlgorithmMismatchException e) {
-            e.printStackTrace();
-            map.put("msg", "算法不匹配");
-        } catch (TokenExpiredException e) {
-            e.printStackTrace();
-            map.put("msg", "身份验证已失效");
-        } catch (Exception e) {
-            e.printStackTrace();
-            map.put("msg", "身份验证失败!");
+        map.put("msg", "请先登录!");
+        if (!"".equals(token)) {
+            try {
+                JWTUtils.checkJWT(token);
+                return true;
+            } catch (AlgorithmMismatchException e) {
+                e.printStackTrace();
+                map.put("msg", "算法不匹配");
+            } catch (TokenExpiredException e) {
+                e.printStackTrace();
+                map.put("msg", "身份验证已失效");
+            } catch (Exception e) {
+                e.printStackTrace();
+                map.put("msg", "身份验证失败!");
+            }
         }
         String msg = map.get("msg");
         response.setContentType("text/html;charset=utf-8");
