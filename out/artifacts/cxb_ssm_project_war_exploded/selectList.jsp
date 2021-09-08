@@ -18,6 +18,10 @@
             <input name="title">
             <input type="submit" value="查询" class="btn"> <span onclick="fswitch('advSearch');"
                                                                style="cursor:hand;color:blue;">高级搜索</span>
+            &nbsp;
+            <span class="btn btn-success"><a href="${pageContext.request.contextPath}/downLoadModel">下载模板</a></span>
+            <span class="btn btn-success"><a href="${pageContext.request.contextPath}/exportModel">导入模板</a></span>
+            <span class="btn btn-success"><a href="${pageContext.request.contextPath}/exportModel">导出模板</a></span>
         </div>
         <br/>
 

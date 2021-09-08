@@ -133,7 +133,9 @@ public class poiController {
                 continue;
             }
             HSSFCell cell = row.getCell(0);
-
+            //房屋id
+            int id =(int)cell.getNumericCellValue();
+            tbl_fwxx.setFwid(id);
         }
     }
 }
