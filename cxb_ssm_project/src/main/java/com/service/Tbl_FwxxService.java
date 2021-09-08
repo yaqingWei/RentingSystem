@@ -3,6 +3,7 @@ package com.service;
 import com.domain.Tbl_Fwxx;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @create 2021-08-02 14:18
  */
 public interface Tbl_FwxxService {
+    @Transactional(readOnly = true)
     List<Tbl_Fwxx> findAll();
 
     int selectMaxShi();
