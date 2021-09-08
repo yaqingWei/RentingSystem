@@ -9,6 +9,9 @@ import com.service.Tbl_JdService;
 import com.service.Tbl_QxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,6 +57,7 @@ public class Tbl_FwxxController {
     }
 
     @RequestMapping("/postFwxx")
+    @Transactional(isolation = Isolation.REPEATABLE_READ,propagation = Propagation.REQUIRED)
     public String postFwxx(@RequestParam("fileupload") MultipartFile fileupload, Tbl_Fwxx fwxx, Tbl_Jd tbl_jd, Tbl_Qx tbl_qx, Tbl_User tbl_user, Tbl_Fwlx tbl_fwlx, Model model) throws IOException {
         System.out.println(fileupload);
         String filename = fileupload.getOriginalFilename();
