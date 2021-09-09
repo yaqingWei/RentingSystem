@@ -52,16 +52,17 @@ public class poiController {
         HSSFWorkbook workbook = new HSSFWorkbook(fileSystem);
         List<Tbl_Fwxx> all = tbl_fwxxService.findAll();
         HSSFSheet sheet = workbook.getSheetAt(0);
+        HSSFCellStyle cellStyle=null;
         for (int i = 0; i <all.size(); i++) {
-            HSSFCellStyle cellStyle = workbook.createCellStyle();
+            cellStyle = workbook.createCellStyle();
             cellStyle.setAlignment(HorizontalAlignment.CENTER);
             cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
             Tbl_Fwxx tbl_fwxx = all.get(i);
             HSSFRow row = sheet.createRow(i + 1);
 
             HSSFCell cell0 = row.createCell(0);
+            cell0.setCellValue(tbl_fwxx.getFwid()+"");
             cell0.setCellStyle(cellStyle);
-            cell0.setCellValue(tbl_fwxx.getFwid());
 
             HSSFCell cell1 = row.createCell(1);
             cell1.setCellValue(tbl_fwxx.getTbl_user().getUname());
@@ -80,11 +81,11 @@ public class poiController {
             cell4.setCellStyle(cellStyle);
 
             HSSFCell cell5 = row.createCell(5);
-            cell5.setCellValue(tbl_fwxx.getShi());
+            cell5.setCellValue(tbl_fwxx.getShi()+"");
             cell5.setCellStyle(cellStyle);
 
             HSSFCell cell6= row.createCell(6);
-            cell6.setCellValue(tbl_fwxx.getTing());
+            cell6.setCellValue(tbl_fwxx.getTing()+"");
             cell6.setCellStyle(cellStyle);
 
             HSSFCell cell7 = row.createCell(7);
@@ -92,7 +93,7 @@ public class poiController {
             cell7.setCellStyle(cellStyle);
 
             HSSFCell cell8 = row.createCell(8);
-            cell8.setCellValue(tbl_fwxx.getZj());
+            cell8.setCellValue(tbl_fwxx.getZj()+"");
             cellStyle.setDataFormat(workbook.createDataFormat().getFormat("#,###.00"));
             cell8.setCellStyle(cellStyle);
 

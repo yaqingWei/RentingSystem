@@ -8,6 +8,11 @@
     <link href="style/mycss.css" rel="stylesheet" type="text/css"/>
     <link href="style/texts.css" rel="stylesheet" type="text/css"/>
     <link href="style/btn.css" rel="stylesheet" type="text/css"/>
+    <style>
+        #showDiv{
+            display: none;
+        }
+    </style>
     <script type="text/javascript" src="jquery/jquery.js"></script>
     <script language="javascript">
         var v = new Array(19);
@@ -100,7 +105,10 @@
     </script>
 </HEAD>
 <BODY BGCOLOR=#FFFFFF LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
-
+<!-- 16:9 aspect ratio -->
+<%--<div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" src="https://www.zjst.net/vod/111582-0-0.html"></iframe>
+</div>--%>
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
         <td colspan="5"><img src="images/top.jpg" width="780" height="213"></td>
@@ -229,7 +237,19 @@
                     </tr>
                     <tr>
                         <td><strong>房屋图片</strong></td>
-                        <td><br><input type="file" name="fileupload"/></td>
+
+                        <td><br><input type="file" name="fileupload" multiple="multiple" onchange="imgChange(event)"/>
+                            <div class="row col-lg-pull-4" id="showDiv">
+                                <div class="col-sm-6 col-md-8">
+                                    <div class="thumbnail">
+                                        <img src="..." alt="..." name="showImg">
+                                        <div class="caption">
+                                            <h3>照片预览</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -248,5 +268,22 @@
 </table>
 <P align="center">华瑞IT教育</P>
 <br/>
+
+<script>
+    function imgChange(e) {
+        //图片预览
+        var reader = new FileReader();
+        reader.onload = (function (file) {
+            return function (e) {
+                //alert(this.result); //这个就是base64的数据了
+                $("img[name='showImg']").prop("src",this.result);
+            };
+        })(e.target.files[0]);
+        reader.readAsDataURL(e.target.files[0]);
+        if($("#showDiv").css("display")=="none") {
+            $("#showDiv").css("display", "block");
+        }
+    }
+</script>
 </BODY>
 </HTML>
