@@ -44,7 +44,7 @@
                         <prop key="KAPTCHA_TEXTPRODUCER_IMPL">com.catl.framework.config.KaptchaTextCreator</prop>
                         <prop key="KAPTCHA_TEXTPRODUCER_CHAR_SPACE">3</prop>
                         <prop key="KAPTCHA_TEXTPRODUCER_CHAR_LENGTH">6</prop>
-                        <prop key="KAPTCHA_TEXTPRODUCER_FONT_NAMES">Arial,Courier,微软雅黑,宋体,楷体</prop>
+                        <prop key="KAPTCHA_TEXTPRODUCER_FONT_NAMES">Arial,Courier,微软雅黑,宋体,楷体,华文琥珀,华文宋体</prop>
                         <prop key="KAPTCHA_NOISE_COLOR">white</prop>
                         <prop key="KAPTCHA_NOISE_IMPL">com.google.code.kaptcha.impl.NoNoise</prop>
                         <prop key="KAPTCHA_OBSCURIFICATOR_IMPL">com.google.code.kaptcha.impl.ShadowGimpy</prop>

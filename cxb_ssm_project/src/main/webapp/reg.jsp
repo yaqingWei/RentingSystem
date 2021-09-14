@@ -9,6 +9,16 @@
     <link href="style/btn.css" rel="stylesheet" type="text/css"/>
     <script src="jquery/jquery.js"></script>
     <script lang="javascript">
+        $(function(){
+            $.post("${pageContext.request.contextPath}/yanzhengMa",function(data){
+                $("#imgcode").prop("src",data);
+            });
+            $("#imgcode").bind("click",function(){
+                $.post("${pageContext.request.contextPath}/yanzhengMa",function(data){
+                    $("#imgcode").prop("src",data);
+                });
+            })
+        });
         function existsUname(){
                 $.ajax({
                     url:"${pageContext.request.contextPath}/existsUname",
@@ -102,7 +112,7 @@
                     <tr>
                         <td>验证码:</td>
                         <td>
-                            <img src="${pageContext.request.contextPath}/yanzhengMa">
+                            <img id="imgcode" width="90px" src="${pageContext.request.contextPath}/yanzhengMa">
                             <input name="code" style="width: 80px">
                         </td>
                     </tr>
