@@ -24,7 +24,7 @@ public class Tbl_UserInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //释放静态以及不再校验范围内的资源
         String path = request.getServletPath();
-        if (path.equals("/detail")|| path.equals("/yanzhengMa") || path.equals("/selectAll") || path.endsWith(".jsp") || path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js") || path.endsWith(".jpg") || path.contains("login")) {
+        if (path.equals("/detail") || path.equals("/inserVue") || path.equals("/yanzhengMa") || path.equals("/selectAll") || path.endsWith(".jsp") || path.endsWith(".html") || path.endsWith(".css") || path.endsWith(".js") || path.endsWith(".jpg") || path.contains("login")) {
             return true;
         }
         Cookie[] cookies = request.getCookies();

@@ -26,4 +26,9 @@ public class Tbl_QxServiceImpl implements Tbl_QxService {
     public Tbl_Qx findById(int id) {
         return tbl_qxMapper.findById(id);
     }
+
+    @Override
+    public int addQx(Tbl_Qx tbl_qx) {
+        return tbl_qxMapper.addQx(tbl_qx);
+    }
 }

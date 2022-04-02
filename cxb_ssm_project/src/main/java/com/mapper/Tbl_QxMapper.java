@@ -1,6 +1,7 @@
 package com.mapper;
 
 import com.domain.Tbl_Qx;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface Tbl_QxMapper {
     List<Tbl_Qx> findAll();
     @Select("select * from tbl_qx where qxid=#{qxid}")
     Tbl_Qx findById(int id);
+    @Insert("insert into tbl_qx values(null,#{qx})")
+    int addQx(Tbl_Qx tbl_qx);
 }

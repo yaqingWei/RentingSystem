@@ -13,4 +13,6 @@ public interface Tbl_QxService {
     List<Tbl_Qx> findAll();
 
     Tbl_Qx findById(int id);
+
+    int addQx(Tbl_Qx tbl_qx);
 }

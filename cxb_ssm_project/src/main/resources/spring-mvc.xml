@@ -33,6 +33,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/*"/>
+            <mvc:exclude-mapping path="/selectVue"/>
             <bean class="com.interceptor.Tbl_UserInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

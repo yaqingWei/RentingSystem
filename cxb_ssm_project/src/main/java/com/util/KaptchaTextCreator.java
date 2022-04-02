@@ -42,38 +42,38 @@ public class KaptchaTextCreator extends DefaultTextCreator {
         int randomoperands = (int) Math.round(Math.random() * 2);
         if (randomoperands == 0) {
             result = x * y;
-            suChinese.append(CNU[x]);
+            suChinese.append(CNUMBERS[x]);
             suChinese.append("*");
-            suChinese.append(CNU[y]);
+            suChinese.append(CNUMBERS[y]);
         } else if (randomoperands == 1) {
             if (!(x == 0) && y % x == 0) {
                 result = y / x;
-                suChinese.append(CNU[y]);
+                suChinese.append(CNUMBERS[y]);
                 suChinese.append("/");
-                suChinese.append(CNU[x]);
+                suChinese.append(CNUMBERS[x]);
             } else {
                 result = x + y;
-                suChinese.append(CNU[x]);
+                suChinese.append(CNUMBERS[x]);
                 suChinese.append("+");
-                suChinese.append(CNU[y]);
+                suChinese.append(CNUMBERS[y]);
             }
         } else if (randomoperands == 2) {
             if (x >= y) {
                 result = x - y;
-                suChinese.append(CNU[x]);
+                suChinese.append(CNUMBERS[x]);
                 suChinese.append("-");
-                suChinese.append(CNU[y]);
+                suChinese.append(CNUMBERS[y]);
             } else {
                 result = y - x;
-                suChinese.append(CNU[y]);
+                suChinese.append(CNUMBERS[y]);
                 suChinese.append("-");
-                suChinese.append(CNU[x]);
+                suChinese.append(CNUMBERS[x]);
             }
         } else {
             result = x + y;
-            suChinese.append(CNU[x]);
+            suChinese.append(CNUMBERS[x]);
             suChinese.append("+");
-            suChinese.append(CNU[y]);
+            suChinese.append(CNUMBERS[y]);
         }
         suChinese.append("=?@" + result);
         return suChinese.toString();

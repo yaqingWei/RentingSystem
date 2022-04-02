@@ -7,6 +7,7 @@ import com.service.Tbl_FwxxService;
 import com.service.Tbl_QxService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -67,5 +68,11 @@ public class MyTest {
     public void test5(){
         List<Tbl_Fwxx> byUid = tbl_fwxxService.findByUid(56);
         System.out.println(byUid);
+    }
+    @Test
+    public void test6(){
+        ApplicationContext context  = new ClassPathXmlApplicationContext("applicationContext.xml");
+        SqlSessionFactoryBean sessionFactoryBean= (SqlSessionFactoryBean) context.getBean("&sqlSessionFactory");
+        System.out.println(sessionFactoryBean);
     }
 }
